@@ -8,6 +8,7 @@ namespace lb4
 {
     class HDD : Storage
     {
+        public HDD() : base("HDD", "съемный ") { }
         public int speedUSB2_0 { get; set; }
         public int memorySection { get; set;}
         public int countSection { get; set; }
@@ -22,6 +23,11 @@ namespace lb4
         }
 
         public override void getFullInfoDevise()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void amountOFmemory()
         {
             throw new NotImplementedException();
         }

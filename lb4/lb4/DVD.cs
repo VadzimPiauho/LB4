@@ -8,8 +8,10 @@ namespace lb4
 {
     class DVD : Storage
     {
+        public DVD() : base("DVD", "диск") { }
         public int readWriteSpeed { get; set; }
-        public string typeDisk { get; set; } 
+        public bool typeDisk { get; set; }
+        public int memoryDVD { get; set; }
 
         public override void copyFile()
         {
@@ -24,6 +26,11 @@ namespace lb4
         public override void getFullInfoDevise()
         {
             throw new NotImplementedException();
+        }
+
+        public override void amountOFmemory()
+        {
+            Console.WriteLine($"Объем памяти DVD равен {memoryDVD}");
         }
     }
 }

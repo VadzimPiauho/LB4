@@ -15,15 +15,12 @@ namespace lb4
 
         static void Main(string[] args)
         {
-
             Storage[] arr = new Storage[3];
 
             arr[0] = new DVD();
             arr[1] = new Flash();
             arr[2] = new HDD();
-            bool go_on = true;   
-
-           
+            bool go_on = true;           
 
             while (go_on)
             {
@@ -36,11 +33,19 @@ namespace lb4
                 Console.WriteLine("0 - Выход из программы");
                 Console.WriteLine("*******************************");
 
-
                 switch (_getch())
                 {
                     case '1':
-
+                        Console.WriteLine("Введите 1 если диск односторонний 0 двусторонний ");
+                        if (Convert.ToString(Console.ReadLine()) == "1")
+                        {
+                            ((DVD)arr[0]).typeDisk = true;
+                        }
+                        else
+                        {
+                            ((DVD)arr[0]).typeDisk = false;
+                        }
+                        workFunc(((DVD)arr[0]), ref go_on, arr[0].getName());
                         _getch();
                         break;
                     case '2': 
@@ -50,17 +55,14 @@ namespace lb4
                         _getch();
                         break;
                     case '3':
-
+                        Console.WriteLine("Введите количество разделов ");
+                        ((HDD)arr[2]).countSection = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Введите объем разделов ");
+                        ((HDD)arr[2]).memorySection = Convert.ToInt32(Console.ReadLine());
+                       // HDD a = arr[2] as HDD;
+                        workFunc(((HDD)arr[2]), ref go_on, arr[2].getName());
                         _getch();
-                        break;
-                    case '4':
-
-                        _getch();
-                        break;
-                    case '5':
-
-                        _getch();
-                        break;
+                        break;                
                     case '0':
                         go_on = false;
                         break;
@@ -71,10 +73,6 @@ namespace lb4
                 }    
             }
         }
-
-
-
-
         public static void workFunc(object storage, ref bool go_on, string name)
         {
             
@@ -82,14 +80,13 @@ namespace lb4
                 {
                     Console.Clear();
                     Console.WriteLine("Выберите пункт меню");
-                    Console.WriteLine("*******************************");
+                    Console.WriteLine("**************************************************************");
                     Console.WriteLine("1 - получение объема памяти");
                     Console.WriteLine("2 - копирование данных (файлов/папок) на устройство");
                     Console.WriteLine("3 - получение информации о свободном объеме памяти на устройстве");
                     Console.WriteLine("4 - получение общей/полной информации об устройстве");
                     Console.WriteLine("0 - Выход из программы");
-                    Console.WriteLine("*******************************");
-
+                    Console.WriteLine("**************************************************************");
 
                     switch (_getch())
                     {
@@ -122,14 +119,15 @@ namespace lb4
                                 {
                                 ((DVD)storage).copyFile();
                                 }
+
                             if (name == "HDD")
-                                {
+                            {
                                 ((HDD)storage).copyFile();
-                                if (((HDD)storage).countSection* ((HDD)storage).memorySection < 780)
-                                    {
-                                        Console.WriteLine("Необходим носитель большего объема");
-                                        go_on = false;
-                                    }
+                                if (((HDD)storage).countSection * ((HDD)storage).memorySection < 780)
+                                {
+                                    Console.WriteLine("Необходим носитель большего объема");
+                                    go_on = false;
+                                }
                             }
                         _getch();
                             break;

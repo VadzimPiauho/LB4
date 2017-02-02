@@ -32,11 +32,11 @@ namespace lb4
         {
             if (memoryFlash > memory)
             {
-                Console.WriteLine($"Cвободный объем памяти на устройстве {memoryFlash- memory}");
+                Console.WriteLine($"Cвободный объем памяти на устройстве/вах  {memoryFlash- memory} Мб");
             }
             else
             {
-                Console.WriteLine($"Cвободный объем памяти на устройстве {((memory / sizeFile) / (memoryFlash / sizeFile)) * (memoryFlash-(memoryFlash / sizeFile)* sizeFile)}");
+                Console.WriteLine($"Cвободный объем памяти на устройстве {((memory / sizeFile) / (memoryFlash / sizeFile)) * (memoryFlash-(memoryFlash / sizeFile)* sizeFile)} Мб");
             }
             
         }

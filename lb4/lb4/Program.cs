@@ -20,58 +20,70 @@ namespace lb4
             arr[0] = new DVD();
             arr[1] = new Flash();
             arr[2] = new HDD();
-            bool go_on = true;           
-
-            while (go_on)
+            bool go_on = true;
+            try
             {
-                Console.Clear();
-                Console.WriteLine("Выберите имеющийся носитель для копирования 565 ГБ файлов (размер файла 780 Мб)");
-                Console.WriteLine("*******************************");
-                Console.WriteLine("1 - DVD");
-                Console.WriteLine("2 - Flash");
-                Console.WriteLine("3 - HDD");
-                Console.WriteLine("0 - Выход из программы");
-                Console.WriteLine("*******************************");
-
-                switch (_getch())
+                while (go_on)
                 {
-                    case '1':
-                        Console.WriteLine("Введите 1 если диск односторонний 0 двусторонний ");
-                        if (Convert.ToString(Console.ReadLine()) == "1")
-                        {
-                            ((DVD)arr[0]).typeDisk = true;
-                        }
-                        else
-                        {
-                            ((DVD)arr[0]).typeDisk = false;
-                        }
-                        workFunc(((DVD)arr[0]), ref go_on, arr[0].getName());
-                        _getch();
-                        break;
-                    case '2': 
-                        Console.WriteLine("Введите объем памяти ");
-                        ((Flash) arr[1]).memoryFlash = Convert.ToInt32(Console.ReadLine());
-                         workFunc(((Flash)arr[1]), ref go_on, arr[1].getName());
-                        _getch();
-                        break;
-                    case '3':
-                        Console.WriteLine("Введите количество разделов ");
-                        ((HDD)arr[2]).countSection = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Введите объем разделов ");
-                        ((HDD)arr[2]).memorySection = Convert.ToInt32(Console.ReadLine());
-                       // HDD a = arr[2] as HDD;
-                        workFunc(((HDD)arr[2]), ref go_on, arr[2].getName());
-                        _getch();
-                        break;                
-                    case '0':
-                        go_on = false;
-                        break;
-                    default:
-                        Console.WriteLine("Неверный выбор");
-                        Thread.Sleep(1000);
-                        break;
-                }    
+                    Console.Clear();
+                    Console.WriteLine("Выберите имеющийся носитель для копирования 565 ГБ файлов (размер файла 780 Мб)");
+                    Console.WriteLine("*******************************");
+                    Console.WriteLine("1 - DVD");
+                    Console.WriteLine("2 - Flash");
+                    Console.WriteLine("3 - HDD");
+                    Console.WriteLine("0 - Выход из программы");
+                    Console.WriteLine("*******************************");
+
+                    switch (_getch())
+                    {
+                        case '1':
+                            Console.WriteLine("Введите 1 если диск односторонний 0 двусторонний ");
+                            if (Convert.ToChar(Console.ReadKey().KeyChar) == '1')
+                            {
+                                ((DVD)arr[0]).typeDisk = true;
+                            }
+                            if (Convert.ToChar(Console.ReadKey().KeyChar) == '0')
+                            {
+                                ((DVD)arr[0]).typeDisk = false;
+                            }
+                            else
+                            {
+                                throw new Exception();
+                            }
+                            workFunc(((DVD)arr[0]), ref go_on, arr[0].getName());
+                            _getch();
+                            break;
+                        case '2':
+                            Console.WriteLine("Введите объем памяти ");
+                            ((Flash)arr[1]).memoryFlash = Convert.ToInt32(Console.ReadLine());
+                            workFunc(((Flash)arr[1]), ref go_on, arr[1].getName());
+                            _getch();
+                            break;
+                        case '3':
+                            Console.WriteLine("Введите количество разделов ");
+                            ((HDD)arr[2]).countSection = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Введите объем разделов ");
+                            ((HDD)arr[2]).memorySection = Convert.ToInt32(Console.ReadLine());
+                            // HDD a = arr[2] as HDD;
+                            workFunc(((HDD)arr[2]), ref go_on, arr[2].getName());
+                            _getch();
+                            break;
+                        case '0':
+                            go_on = false;
+                            break;
+                        default:
+                            Console.WriteLine("Неверный выбор");
+                            Thread.Sleep(1000);
+                            break;
+                    }
+                }
             }
+            catch (Exception)
+            {
+                Console.WriteLine("Неверный ввод Завершение программы");
+                Environment.Exit(0);
+            }
+          
         }
         public static void workFunc(object storage, ref bool go_on, string name)
         {

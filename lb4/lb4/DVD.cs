@@ -16,12 +16,30 @@ namespace lb4
 
         public override void copyFile()
         {
-            throw new NotImplementedException();
+            if (typeDisk)
+            {
+                Console.WriteLine($"тип диска - односторонний");
+                Console.WriteLine($"Необходимо количество носителей DVD равно {(memory / sizeFile) / (memoryDVD1 / sizeFile)}"); ;
+            }
+            else
+            {
+                Console.WriteLine($"тип диска - двусторонний");
+                Console.WriteLine($"Необходимо количество носителей DVD равно {(memory / sizeFile) / (memoryDVD2 / sizeFile)}");
+            }
         }
 
         public override void getFreeMemotyDevise()
         {
-            throw new NotImplementedException();
+            if (typeDisk)
+            {
+                Console.WriteLine($"тип диска - односторонний");
+                Console.WriteLine($"Cвободный объем памяти на устройстве {((memory / sizeFile) / (memoryDVD1 / sizeFile)) * (memoryDVD1 - (memoryDVD1 / sizeFile) * sizeFile)} Мб");
+            }
+            else
+            {
+                Console.WriteLine($"тип диска - двусторонний");
+                Console.WriteLine($"Cвободный объем памяти на устройстве {((memory / sizeFile) / (memoryDVD2 / sizeFile)) * (memoryDVD2 - (memoryDVD2 / sizeFile) * sizeFile)} Мб");
+            }
         }
 
         public override void getFullInfoDevise()
